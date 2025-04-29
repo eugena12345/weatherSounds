@@ -22,6 +22,7 @@
   "homepage": "https://github.com/eugena12345/weatherSounds#readme",
   "devDependencies": {
     "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.3",
     "sass": "^1.87.0",
     "sass-loader": "^16.0.5",

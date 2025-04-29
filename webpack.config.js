@@ -26,6 +26,23 @@ module.exports = {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
+      // {
+      //   test: /\.(png|jpg|jpeg|gif|svg)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[hash].[ext]', 
+      //         outputPath: 'assets/', 
+      //       },
+      //     },
+      //   ],
+      // },
+      {
+        test: /\.svg$/, // Обрабатывать .svg файлы
+        type: 'asset/resource',
+        //use: ['file-loader'], // Копировать файлы в выходную директорию
+      },
     ],
   },
   plugins: [
