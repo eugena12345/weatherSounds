@@ -43,6 +43,14 @@ module.exports = {
         type: 'asset/resource',
         //use: ['file-loader'], // Копировать файлы в выходную директорию
       },
+      {
+        test: /\.(mp3|wav|ogg)$/, // Обрабатывать аудиофайлы
+        type: 'asset/resource', // Копировать файлы в выходную директорию
+        //use: ['file-loader'], //
+        generator: {
+          filename: 'assets/audio/[name][ext]', // Путь для скопированных файлов
+        },
+      },
     ],
   },
   plugins: [
