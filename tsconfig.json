@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
       "outDir": "./dist",       
-      "module": "ES6",          
+      "module": "ES6",          //"nodenext", //
       "target": "ES6",          
       "strict": true,           
-      "esModuleInterop": true   
+      "esModuleInterop": true  ,
+      "moduleResolution": "node" //"nodenext" //
     },
-    "include": ["src/**/*"]    
+    "include": ["src/**/*", "global.d.ts"]    
   }
