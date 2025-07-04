@@ -5,28 +5,28 @@ import snowPic from "./assets/icons/cloud-snow.svg";
 import sunSoundSrc from "./assets/sounds/summer.mp3";
 import rainSoundSrc from "./assets/sounds/rain.mp3";
 import sunsnowSoundSrc from "./assets/sounds/winter.mp3";
-import { Images, Sounds, ElementsOnPage, SoundEffect } from "./types";
+import { Images, ElementsOnPage, SoundEffect } from "./types"; //Sounds, 
 
 export const elements: ElementsOnPage = {
-  container: document.getElementsByClassName("container")[0],
+  container: document.querySelector<HTMLElement>(".container")!,
   soundboxes: [
     {
       boxName: "sun",
-      boxElement: document.getElementsByClassName("sun")[0],
+      boxElement: document.querySelector<HTMLElement>(".sun")!,
       isPlay: false,
     },
     {
       boxName: "rain",
-      boxElement: document.getElementsByClassName("rain")[0],
+      boxElement: document.querySelector<HTMLElement>(".rain")!,
       isPlay: false,
     },
     {
       boxName: "snow",
-      boxElement: document.getElementsByClassName("snow")[0],
+      boxElement: document.querySelector<HTMLElement>(".snow")!,
       isPlay: false,
     },
   ],
-  volume: document.getElementById("volume"),
+  volume: document.getElementById("volume") as HTMLInputElement | null,
 };
 
 const images: Images = {
@@ -35,11 +35,11 @@ const images: Images = {
   snow: snowPic,
 };
 
-const sounds: Sounds = {
-  sun: sunSoundSrc,
-  rain: rainSoundSrc,
-  snow: sunsnowSoundSrc,
-};
+// const sounds: Sounds = {
+//   sun: sunSoundSrc,
+//   rain: rainSoundSrc,
+//   snow: sunsnowSoundSrc,
+// };
 
 const soundsEffect: SoundEffect[] = [
   { effectName: "sun", effectElement: new Audio(sunSoundSrc) },
@@ -48,10 +48,10 @@ const soundsEffect: SoundEffect[] = [
 ];
 
 const addBoxImage = () => {
-  elements.soundboxes.map((box) => {
+  elements.soundboxes.forEach((box) => {
     const boxImg = document.createElement("img");
     boxImg.src = images[box.boxName];
-    box.boxElement.append(boxImg);
+    box.boxElement.append(boxImg)!;
   });
 };
 
@@ -66,16 +66,19 @@ const setActiveBoxPlay = (activeBox: string) => {
 };
 
 function handleInputRange(event: Event) {
-  const target = event.target as HTMLInputElement;
+  const target = event.target as EventTarget | null;
+  if (target && target instanceof HTMLInputElement) {
   const newCurrentValue = +target.value / 100;
   soundsEffect.forEach((sound) => {
     sound.effectElement.volume = newCurrentValue;
   });
+  }
 }
 
 elements.soundboxes.forEach((box) => {
-  box.boxElement.addEventListener("click", (e) => {
-    elements.container.classList = "";
+  box.boxElement!.addEventListener("click", (e) => {
+    //elements.container.classList = "";
+    elements.container.className = "";
     elements.container.classList.add("container", `${box.boxName}BG`);
     setActiveBoxPlay(box.boxName);
     if (box.isPlay) {

@@ -1,5 +1,7 @@
-export interface Images {
-  [key: string]: string;
+export type BoxName = "sun" | "rain" | "snow";
+
+export type Images = {
+  [key in BoxName]: string;
 }
 
 export interface Sounds {
@@ -7,7 +9,7 @@ export interface Sounds {
 }
 
 export interface Soundboxes {
-  boxName: string;
+  boxName: BoxName;
   boxElement: Element;
   isPlay: boolean;
 }
